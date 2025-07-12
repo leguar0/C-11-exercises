@@ -1,4 +1,5 @@
 #include <iostream>
+#include <functional>
 
 //16. 
 class CKontener
@@ -7,6 +8,8 @@ class CKontener
 	int size;
 
 public:
+	using iterator = int*;
+
 	CKontener(int size);
 	~CKontener();
 
@@ -17,6 +20,28 @@ public:
 	CKontener(CKontener&& ck) noexcept;
 	CKontener& operator=(CKontener&& ck) noexcept;
 
+
+	//18.
+	int& operator[](int i)
+	{
+		return tab[i];
+
+	}
+
+	int Size() const
+	{
+		return size;
+	}
+
+	//19.
+	iterator begin()
+	{
+		return tab;
+	}
+	iterator end()
+	{
+		return tab + size;
+	}
 
 	void Wypisz();
 };
@@ -83,11 +108,33 @@ CKontener& CKontener::operator=(CKontener&& ck) noexcept
 
 void CKontener::Wypisz()
 {
-	if (!tab) std::cout << "pustak" << std::endl;
+	if (!tab)
+	{
+		std::cout << "pustak" << std::endl;
+		return;
+	}
 
 	for (int i = 0; i < size; ++i)
 		std::cout << tab[i] << " ";
 	std::cout << std::endl;
+}
+
+
+//18.
+void BubbleSort(CKontener& ck, std::function<bool(int, int)> action)
+{
+	for (int i = 0; i < ck.Size(); ++i)
+	{
+		for (int y = 0; y < ck.Size() - i - 1; ++y)
+		{
+			if (action(ck[y], ck[y+1]))
+			{
+				int tmp = ck[y];
+				ck[y] = ck[y + 1];
+				ck[y + 1] = tmp;
+			}
+		}
+	}
 }
 
 int main()
@@ -109,7 +156,19 @@ int main()
 	ck2.Wypisz();
 
 
+	std::cout << "18" << std::endl;
 	//18.
+	auto wieksze =
+		[](int a, int b) { return (a > b);  };
+	auto mniejsze =
+		[](int a, int b) { return (a < b); };
+	BubbleSort(ck, mniejsze);
+	ck.Wypisz();
+	BubbleSort(ck, wieksze);
+	ck.Wypisz();
 
+	//19.
+	for (auto x : ck)
+		std::cout << x << std::endl;
 
 }
