@@ -24,7 +24,7 @@ public:
 	{
 	}
 
-	int ObliczPole()
+	int ObliczPole() const
 	{
 		return wysokosc * szerokosc;
 	}
