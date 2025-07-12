@@ -2,7 +2,7 @@
 #include <string>
 
 //6.
-void powitanie(std::string name, std::string greeting = "Czesc");
+void powitanie(const std::string& name, const std::string& greeting = "Czesc");
 
 //8.
 int fibbonacci(int n);
@@ -64,7 +64,7 @@ int main()
 	std::cout << prostokat.ObliczPole() << std::endl;
 }
 
-void powitanie(std::string name, std::string greeting)
+void powitanie(const std::string& name, const std::string& greeting)
 {
 	std::cout << greeting << " " << name << std::endl;
 }

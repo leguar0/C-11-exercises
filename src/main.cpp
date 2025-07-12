@@ -65,7 +65,6 @@ CKontener::CKontener(const CKontener& ck)
 
 	for (int i = 0; i < size; ++i)
 		tab[i] = ck.tab[i];
-
 }
 
 CKontener& CKontener::operator=(const CKontener& ck)
